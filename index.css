@@ -1,0 +1,21 @@
+
+
+#mainHeading{
+	text-align: left;
+}
+
+#mainHeadingText{
+	font-size: 60px;
+	color: #8E888A;
+}
+
+.mainButton{
+	width:400px;
+	margin-bottom:300px;
+	margin-left:100px;
+	font-size:40px;
+	color:white;
+	background-color:black;
+	background-image: url("images/7.jpg");
+
+}

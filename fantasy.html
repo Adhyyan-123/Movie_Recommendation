@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="bootstrap-3.3.7/dist/js/jquery-3.1.1.min.js"></script>
+  <script src="bootstrap-3.3.7/dist/js/bootstrap.js"></script>
+  <script>
+	xhr=new XMLHttpRequest();
+	i=1;
+	function loadImage(){
+		xhr.abort();
+		xhr.onreadystatechange= InsertImage;
+		xhr.open("GET","imagesource.php?img=fantasy&section="+i,true);
+		xhr.send();
+	}
+	function InsertImage(){
+
+		if(xhr.readyState==4 && xhr.status==200){
+			response=xhr.responseText;
+			document.getElementById("img"+i).src="images/"+response;
+			if (i<6){
+			setTimeout(loadImage,2000);
+			i+=1}
+		}
+	}
+		
+ </script>
+  
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50" onload="loadImage()">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><span class="glyphicon glyphicon-film"></a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="#section1" style="padding-left:60px;padding-right:60px;">Lord of the Rings</a></li>
+          <li><a href="#section2" style="padding-left:60px;padding-right:60px;">Harry Potter</a></li>
+          <li><a href="#section3" style="padding-left:60px;padding-right:60px;">Thor</a></li>
+          <li><a href="#section4" style="padding-left:60px;padding-right:60px;">Narnia</a></li>
+          <li><a href="#section5" style="padding-left:60px;padding-right:60px;">Doctor Strange</a></li>
+          <li><a href="#section6" style="padding-left:60px;padding-right:60px;">Alice in the wonderland</a></li>
+          
+        </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="section1">
+<img id="img1" src="images/loader.gif" style="width:1366px;height:700px;" >
+</div>
+
+<div id="section2">
+<img id="img2" src="images/loader.gif" style="width:1366px;height:700px;" >
+</div>
+
+<div id="section3">
+<img id="img3" src="images/loader.gif" style="width:1366px;height:700px;" >
+</div>
+
+<div id="section4">
+<img id="img4" src="images/loader.gif" style="width:1366px;height:700px;" >
+</div>
+
+<div id="section5">
+<img id="img5" src="images/loader.gif" style="width:1366px;height:700px;" >
+</div>
+
+<div id="section6">
+<img id="img6" src="images/loader.gif" style="width:1366px;height:700px;" >
+</div>
+
+</div>
+</body>

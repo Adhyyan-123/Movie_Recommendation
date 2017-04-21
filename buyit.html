@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+   <head><title>Buy {{name["movieName"]}}</title>
+
+	<script>
+	name='{{name["movieName"]}}';
+	file='{{name["fromFile"]}}';
+	function Check(){
+			xhr1=new XMLHttpRequest();
+			xhr1.onreadystatechange=update;
+			xhr1.open("GET","present/"+name,true);
+			xhr1.send();			
+		}
+	function update(){
+		if(xhr1.readyState==4 && xhr1.status==200){
+				ans=xhr1.responseText;
+				document.getElementById("available").innerHTML=ans;
+				setTimeout("Check()",1000);
+			}
+		}
+		function NextPage(){
+				xhr=new XMLHttpRequest();
+				xhr.onreadystatechange=response;
+				xhr.open("POST",name+"/Submitting",true);
+				//To tell server that data in post of form data we set content type.
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				var sform=getString();
+				xhr.send(sform);
+			}
+		function response(){
+			if(xhr.readyState==4 &&(xhr.status==200 || xhr.status==304)){
+				document.getElementById("Response").innerHTML=xhr.responseText;
+			}
+		}
+		function getString(){
+			var arr=new Array();
+			Namev=document.getElementById("Name").value;
+			arr.push(encodeURIComponent("Name")+"="+encodeURIComponent(Namev));
+			Passv=document.getElementById("city").value;
+			arr.push(encodeURIComponent("city")+"="+encodeURIComponent(Passv));
+			Passv=document.getElementById("NoCD").value;
+			arr.push(encodeURIComponent("NoCD")+"="+encodeURIComponent(Passv));
+			return arr.join('&');
+		}
+	
+	</script>
+	</head>
+   <body style="background-color:black" onload="Check()">
+    <h1 style="color:red;text-decoration:underline;text-align:center;margin-top:100px;font-family:Palatino Linotype,Book Antiqua,Palatino, serif;"> {{ name["movieName"]}} </h1>
+      <p>Available CDs: </p> <div id="available" style="color:white"></div>
+      <div id="form1">
+		<form action="Submitting" method="POST" onsubmit="NextPage();return false">
+			<label>Name: <input type="text" id="Name" placeholder="Name" /></label>
+			<label>City: <input type="text"id="city"  placeholder="City" /></label>
+			<label>Number of CDs: <input type="text" id="NoCD" placeholder="Number of CDs" /></label>
+			<input type="submit">submit</input>
+		</form>
+		<div style="color:white" id="Response"></div>
+	</div>
+   </body>
+</html>
